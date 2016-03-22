@@ -1,0 +1,23 @@
+{
+  "name": "easy-svg-store",
+  "version": "1.0.0",
+  "description": "Simple SVG-sprite generator, No fuss no coconuts ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolandaugusto/easy-svg-store.git"
+  },
+  "keywords": [
+    "svg",
+    "sprite"
+  ],
+  "author": "Roland Castillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rolandaugusto/easy-svg-store/issues"
+  },
+  "homepage": "https://github.com/rolandaugusto/easy-svg-store#readme"
+}
