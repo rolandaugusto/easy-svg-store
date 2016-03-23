@@ -6,6 +6,9 @@
   "scripts": {
     "test": "test"
   },
+  "dependencies": {
+    "read-multiple-files": "~1.1.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rolandaugusto/easy-svg-store.git"
