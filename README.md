@@ -8,7 +8,7 @@ The result is a SVG sprite with the given filenames as ID in lowercase
 Installation
 ============
 
-Not published yet
+npm install easy-svg-store
 
 Usage
 ======
