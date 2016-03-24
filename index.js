@@ -36,7 +36,7 @@ module.exports = function (path, options) {
         console.log(`Total files in folder: ${files.length}, SVGs found: ${filesPath.length}`);
 
         readMultipleFiles(filesPath, 'utf-8', function (err, contents) {
-""
+
             contents.map(function (item, index) {
                 var symbolId = files[index].split('.')[0].toLowerCase();
                 item = item.replace(/<svg /g, '<symbol id="' + symbolId + '" ');
