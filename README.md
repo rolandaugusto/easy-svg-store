@@ -17,8 +17,11 @@ Usage
 var path = require('path');
 var esvgs = require('easy-svg-store');
 
-esvgs(path.join(__dirname, '..', 'svgs'), {
-        svgSpriteName: 'svgstore', // The desired file name e.g. svgstore.svg
+var mySVGsFolder = path.join(__dirname, 'svgs');
+
+// This will generate a SVG file called svgstore.svg and a HTML file svgstore.html
+esvgs(mySVGsFolder, {
+        svgSpriteName: 'svgstore', // The desired file name
         outputDirectory: __dirname, // Where you want to output the sprite
         outputHtml: true // Do you want to generate a HTML file to see the result?
       }
