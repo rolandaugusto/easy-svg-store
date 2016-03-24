@@ -1,53 +1,72 @@
-/*
-* Easy SVG store
-*
-* No Fuzz svg sprite
-*
-* */
 var fs = require('fs');
-var _path = require('path');
+var path = require('path');
 var readMultipleFiles = require('read-multiple-files');
 
-module.exports = function (path, options) {
-    path = path || '';
+/**
+ *
+ * @param folder{string} The folder containing the SVG files
+ * @param options{object}
+ *              svgSpriteName{string} filename - The name for the svg sprite file
+ *              outputDirectory{string} directory - The file destination
+ *              outputHtml{boolean} -  Should an HTML file be generated? Mostly for quick review
+ *
+ * @return void
+ *
+ */
+module.exports = function (folder, options) {
+    // Globals
+    var filesPath = [], processedFiles = [], htmlOut = [];
+
+    folder = folder || '';
     options = options || {};
 
     options.svgSpriteName = options.svgSpriteName || 'svgsprite';
+    options.outputDirectory = options.outputDirectory || folder;
+    options.outputHtml = options.outputHtml || false;
 
-    fs.readdir(path, function (err, files) {
-        var filesPath = [],
-            processedFiles = [],
-            initialFiles = files.length;
+    fs.readdir(folder, function (err, files) {
+
         if (err) {
             console.error(err);
             return;
         }
 
         files = files.filter(function (value) {
-            return value !== options.svgSpriteName + '.svg' && _path.extname(value) === '.svg';
+            return value !== options.svgSpriteName + '.svg' && path.extname(value) === '.svg';
         });
 
         for (var i = 0; i < files.length; i++) {
-                filesPath[i] = _path.join(path, files[i]);
+            filesPath[i] = path.join(folder, files[i]);
         }
-
-        console.log(`Total files in folder: ${initialFiles}, SVGs found: ${filesPath.length}`);
 
         readMultipleFiles(filesPath, 'utf-8', function (err, contents) {
 
             contents.map(function (item, index) {
                 var symbolId = files[index].split('.')[0].toLowerCase();
                 item = item.replace(/xmlns="http:\/\/www.w3.org\/2000\/svg"/g, '');
-                item = item.replace(/<svg /g, '<symbol id="' + symbolId + '" ');
+                item = item.replace(/<svg /g, '<symbol id="' + symbolId + '"');
                 item = item.replace(/<\/svg>/g, '</symbol>');
+
+                if (options.outputHtml) {
+                    item.replace(/viewBox="([^"]+)"/g, function (match) {
+                        htmlOut += '<svg ' + match + '><use xlink:href=\"#' + symbolId + '\"></use></svg>';
+                    });
+                }
                 processedFiles += item;
-                console.log(item);
             });
 
-            var svgTopBefore = '<svg xmlns="http://www.w3.org/2000/svg">';
-            var svgTopAfter = '</svg>';
+            var outputUri = path.join(options.outputDirectory, options.svgSpriteName);
+            var resultSVGBuffer = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" display="none">' + processedFiles + '</svg>';
 
-            fs.writeFile(_path.join(path, options.svgSpriteName + '.svg'), svgTopBefore + processedFiles + svgTopAfter);
+            fs.writeFile(outputUri + '.svg', resultSVGBuffer);
+
+            if (options.outputHtml) {
+                fs.writeFile(outputUri + '.html',
+                    '<!doctype html><html lang="en">' +
+                    resultSVGBuffer +
+                    htmlOut +
+                    '</html>');
+            }
         });
     });
 };
