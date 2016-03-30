@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/easy-svg-store.svg)](https://badge.fury.io/js/easy-svg-store)
+
 # easy-svg-store
 
 No Fuzz SVG sprite generator. Just Specify the folder containing the SVG
