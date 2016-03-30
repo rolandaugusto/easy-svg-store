@@ -47,8 +47,8 @@ module.exports = function (folder, options) {
                     .replace(/<svg /g, '<symbol id="' + symbolId + '"')
                     .replace(/<\/svg>/g, '</symbol>')
                     // Remove unnecessary attributes
-                    .replace(/width="([^"]+)"/g, '')
-                    .replace(/height="([^"]+)"/g, '');
+                    .replace(/( width)="([^"]+)"/g, '')
+                    .replace(/( height)="([^"]+)"/g, '');
 
                 if (options.outputHtml) {
                     item.replace(/viewBox="([^"]+)"/g, function (match) {
