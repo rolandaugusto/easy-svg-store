@@ -43,9 +43,12 @@ module.exports = function (folder, options) {
 
             contents.map(function (item, index) {
                 var symbolId = files[index].split('.')[0].toLowerCase();
-                item = item.replace(/xmlns="http:\/\/www.w3.org\/2000\/svg"/g, '');
-                item = item.replace(/<svg /g, '<symbol id="' + symbolId + '"');
-                item = item.replace(/<\/svg>/g, '</symbol>');
+                item = item.replace(/xmlns="http:\/\/www.w3.org\/2000\/svg"/g, '')
+                    .replace(/<svg /g, '<symbol id="' + symbolId + '"')
+                    .replace(/<\/svg>/g, '</symbol>')
+                    // Remove unnecessary attributes
+                    .replace(/width="([^"]+)"/g, '')
+                    .replace(/height="([^"]+)"/g, '');
 
                 if (options.outputHtml) {
                     item.replace(/viewBox="([^"]+)"/g, function (match) {

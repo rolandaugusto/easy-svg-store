@@ -17,6 +17,7 @@ Usage
 var path = require('path');
 var esvgs = require('easy-svg-store');
 
+// The folder where the individual svgs are stored 
 var mySVGsFolder = path.join(__dirname, 'svgs');
 
 // This will generate a SVG file called svgstore.svg and a HTML file svgstore.html
