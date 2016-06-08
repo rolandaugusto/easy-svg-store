@@ -5,6 +5,8 @@
 No Fuzz SVG sprite generator. Just Specify the folder containing the SVG
 files!
 
+Generate SVG SPRITES from the command line!!
+
 The result is a SVG sprite with the given filenames as ID in lowercase
 
 Installation
@@ -12,8 +14,8 @@ Installation
 
 npm install easy-svg-store
 
-Use as a component
-===================
+Usage as a component
+====================
 
 ```javascript
 var path = require('path');
@@ -30,8 +32,8 @@ esvgs(mySVGsFolder, {
       }
 );
 ```
-Use from command line
-=====================
+Usage from the command line
+============================
 
 ```bash
 $ esvgs -h
