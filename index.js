@@ -23,6 +23,13 @@ module.exports = function (folder, options) {
     options.svgSpriteName = options.svgSpriteName || 'svgsprite';
     options.outputDirectory = options.outputDirectory || folder;
     options.outputHtml = options.outputHtml || false;
+    options.commandLine = options.commandLine || false;
+
+    if (options.commandLine) {
+        console.log('SUCCESS!');
+        console.log('-> Source directory: %s, Output directory: %s, SVG Sprite file name: %s, output Html?: %s',
+        folder, options.outputDirectory, options.svgSpriteName, options.outputHtml);
+    }
 
     fs.readdir(folder, function (err, files) {
 
@@ -59,13 +66,15 @@ module.exports = function (folder, options) {
             });
 
             var outputUri = path.join(options.outputDirectory, options.svgSpriteName);
-            var resultSVGBuffer = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" display="none">' + processedFiles + '</svg>';
+            var resultSVGBuffer = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" ' +
+             'display="none"' + '>' + processedFiles + '</svg>';
 
             fs.writeFile(outputUri + '.svg', resultSVGBuffer);
 
             if (options.outputHtml) {
                 fs.writeFile(outputUri + '.html',
                     '<!doctype html><html lang="en">' +
+                    '<style>svg{display:"inline-block";width:20%;padding:2%;}</style>' +
                     resultSVGBuffer +
                     htmlOut +
                     '</html>');
