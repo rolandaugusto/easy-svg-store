@@ -34,14 +34,16 @@ Use from command line
 =====================
 
 ```bash
+$ esvgs -h
+
 Usage: esvgs [options]
 
   Options:
 
     -h, --help         output usage information
     -s, --sprite-name  The name for the generated sprite [default: svgstore.svg].
-    -f, --folder       The folder containing the svg files [default: /Users/rcastillo/Documents/svgs].
-    -o, --output       The destination folder for the output [default: /Users/rcastillo/Documents/svgs].
-    -d, --html         True if a HTML example should be generated [default: false].
+    -f, --folder       The folder containing the svg files [default: folder where this is executed].
+    -o, --output       The destination folder for the output [default: folder where this is executed].
+    -d, --html         Generate a HTML example [default: false].
 
 ```

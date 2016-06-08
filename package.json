@@ -1,6 +1,6 @@
 {
   "name": "easy-svg-store",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple SVG-sprite generator, No fuss no coconuts ",
   "main": "index.js",
   "scripts": {

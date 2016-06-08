@@ -25,12 +25,6 @@ module.exports = function (folder, options) {
     options.outputHtml = options.outputHtml || false;
     options.commandLine = options.commandLine || false;
 
-    if (options.commandLine) {
-        console.log('SUCCESS!');
-        console.log('-> Source directory: %s, Output directory: %s, SVG Sprite file name: %s, output Html?: %s',
-        folder, options.outputDirectory, options.svgSpriteName, options.outputHtml);
-    }
-
     fs.readdir(folder, function (err, files) {
 
         if (err) {
@@ -81,4 +75,11 @@ module.exports = function (folder, options) {
             }
         });
     });
+
+    if (options.commandLine) {
+        console.log('SUCCESS!');
+        console.log(count + ' SVG files added to the sprite');
+        console.log('-> Source directory: %s, Output directory: %s, SVG Sprite file name: %s, output Html?: %s',
+        folder, options.outputDirectory, options.svgSpriteName, options.outputHtml);
+    }
 };
