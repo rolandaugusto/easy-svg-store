@@ -61,7 +61,7 @@ module.exports = function (folder, options) {
 
             var outputUri = path.join(options.outputDirectory, options.svgSpriteName);
             var resultSVGBuffer = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" ' +
-             'display="none"' + '>' + processedFiles + '</svg>';
+              '>' + processedFiles + '</svg>';
 
             fs.writeFile(outputUri + '.svg', resultSVGBuffer);
 
@@ -78,7 +78,6 @@ module.exports = function (folder, options) {
 
     if (options.commandLine) {
         console.log('SUCCESS!');
-        console.log(count + ' SVG files added to the sprite');
         console.log('-> Source directory: %s, Output directory: %s, SVG Sprite file name: %s, output Html?: %s',
         folder, options.outputDirectory, options.svgSpriteName, options.outputHtml);
     }
