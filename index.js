@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var chalk = require('chalk');
 var readMultipleFiles = require('read-multiple-files');
 
 /**
@@ -23,6 +24,7 @@ module.exports = function (folder, options) {
     options.svgSpriteName = options.svgSpriteName || 'svgsprite';
     options.outputDirectory = options.outputDirectory || folder;
     options.outputHtml = options.outputHtml || false;
+    options.commandLine = options.commandLine || false;
 
     fs.readdir(folder, function (err, files) {
 
@@ -59,17 +61,32 @@ module.exports = function (folder, options) {
             });
 
             var outputUri = path.join(options.outputDirectory, options.svgSpriteName);
-            var resultSVGBuffer = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" display="none">' + processedFiles + '</svg>';
+            var resultSVGBuffer = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" ' +
+              '>' + processedFiles + '</svg>';
 
             fs.writeFile(outputUri + '.svg', resultSVGBuffer);
 
             if (options.outputHtml) {
                 fs.writeFile(outputUri + '.html',
                     '<!doctype html><html lang="en">' +
+                    '<style>svg{display:"inline-block";width:20%;padding:2%;}</style>' +
                     resultSVGBuffer +
                     htmlOut +
                     '</html>');
             }
         });
     });
+
+    if (options.commandLine) {
+        console.log(chalk.bold.cyan(' SVG SPRITE GENERATED!'));
+        console.log(
+          chalk.magenta(' Source directory: ') + ' %s' +
+          chalk.magenta('\n Output directory:') +  ' %s' +
+          chalk.magenta('\n SVG Sprite location:') + ' %s' +
+          chalk.magenta('\n HTML demo:') + ' %s',
+          folder,
+          options.outputDirectory,
+          options.outputDirectory + '/' + options.svgSpriteName + '.svg',
+          options.outputHtml ? options.outputDirectory + '/' + options.svgSpriteName + '.html' : 'none');
+    }
 };
