@@ -3,10 +3,9 @@ var program = require('commander');
 var esvgs = require('./index.js');
 
 program
-  // .arguments('<folder>')
+  .option('-i, --input [dir]', 'The directory containing the svg files [default: ' + process.cwd() + '].')
+  .option('-o, --output [dir]', 'The destination directory for the output [default: ' + process.cwd() + '].')
   .option('-s, --sprite-name [name]', 'The name for the generated sprite [default: svgstore.svg].')
-  .option('-i, --input [dir]', 'The folder containing the svg files [default: ' + process.cwd() + '].')
-  .option('-o, --output [dir]', 'The destination folder for the output [default: ' + process.cwd() + '].')
   .option('-x, --html', 'Generate a HTML example [default: false].')
   .parse(process.argv);
 
