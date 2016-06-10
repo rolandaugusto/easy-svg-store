@@ -44,8 +44,8 @@ Usage: esvgs [options]
 
     -h, --help                output usage information
     -s, --sprite-name [name]  The name for the generated sprite [default: svgstore.svg].
-    -i, --input [dir]         The folder containing the svg files [default: /Users/rcastillo/development/easy-svg-store].
-    -o, --output [dir]        The destination folder for the output [default: /Users/rcastillo/development/easy-svg-store].
+    -i, --input [dir]         The folder containing the svg files [default: THIS_FOLDER].
+    -o, --output [dir]        The destination folder for the output [default: THIS_FOLDER].
     -x, --html                Generate a HTML example [default: false].
 
 ```
