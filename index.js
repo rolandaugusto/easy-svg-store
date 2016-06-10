@@ -46,11 +46,20 @@ module.exports = function (folder, options) {
             contents.map(function (item, index) {
                 var symbolId = files[index].split('.')[0].toLowerCase();
                 item = item.replace(/xmlns="http:\/\/www.w3.org\/2000\/svg"/g, '')
-                    .replace(/<svg /g, '<symbol id="' + symbolId + '"')
-                    .replace(/<\/svg>/g, '</symbol>')
-                    // Remove unnecessary attributes
+                    .replace(/<svg /g, '<svg id="' + symbolId + '"')
+                    .replace(/<\/svg>/g, '</svg>')
+                    //Add a prefix to all the found IDs
+                    .replace(/( id)="([^"]+)"/g, function (match, p1, p2) {
+                      return ' id="' + symbolId + (p2 !== symbolId ? '-' + p2 : '') + '"';
+                    })
+                    //Replace the IDs usage 'url(#id) ' throughout the svg
+                    .replace(/(url\(#)([\w]*)(\))/g, function (match, p1, p2) {
+                      return 'url(#' + symbolId + '-' + p2 + ')';
+                    })
+                    // Remove dimensions in order to allow its config via css
                     .replace(/( width)="([^"]+)"/g, '')
-                    .replace(/( height)="([^"]+)"/g, '');
+                    .replace(/( height)="([^"]+)"/g, '')
+                ;
 
                 if (options.outputHtml) {
                     item.replace(/viewBox="([^"]+)"/g, function (match) {
@@ -61,16 +70,20 @@ module.exports = function (folder, options) {
             });
 
             var outputUri = path.join(options.outputDirectory, options.svgSpriteName);
-            var resultSVGBuffer = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" ' +
-              '>' + processedFiles + '</svg>';
+            var resultSVGBuffer = (
+              '<?xml version="1.0"?>' +
+              '\n<svg xmlns="http://www.w3.org/2000/svg">' +
+                processedFiles +
+              '</svg>'
+             );
 
             fs.writeFile(outputUri + '.svg', resultSVGBuffer);
 
             if (options.outputHtml) {
                 fs.writeFile(outputUri + '.html',
                     '<!doctype html><html lang="en">' +
-                    '<style>svg{display:"inline-block";width:20%;padding:2%;}</style>' +
-                    resultSVGBuffer +
+                    '<style>svg{width:20%;padding:2%;}</style>' +
+                    '<div style="position:absolute;left:-9999px;">' + resultSVGBuffer + '</div>' +
                     htmlOut +
                     '</html>');
             }
