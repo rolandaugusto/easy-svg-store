@@ -9,9 +9,9 @@ program
   .option('-x, --html', 'Generate a HTML example [default: false].')
   .parse(process.argv);
 
-  esvgs(program.src || process.cwd(), {
+  esvgs(program.input || process.cwd(), {
           svgSpriteName: program.spriteName || 'svgstore',
-          outputDirectory: program.out || process.cwd(),
+          outputDirectory: program.output || process.cwd(),
           outputHtml: program.html || false,
           commandLine: true
         }
