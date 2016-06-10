@@ -42,10 +42,10 @@ Usage: esvgs [options]
 
   Options:
 
-    -h, --help         output usage information
-    -s, --sprite-name  The name for the generated sprite [default: svgstore.svg].
-    -f, --folder       The folder containing the svg files [default: folder where this is executed].
-    -o, --output       The destination folder for the output [default: folder where this is executed].
-    -d, --html         Generate a HTML example [default: false].
+    -h, --help                output usage information
+    -s, --sprite-name [name]  The name for the generated sprite [default: svgstore.svg].
+    -i, --input [dir]         The folder containing the svg files [default: /Users/rcastillo/development/easy-svg-store].
+    -o, --output [dir]        The destination folder for the output [default: /Users/rcastillo/development/easy-svg-store].
+    -x, --html                Generate a HTML example [default: false].
 
 ```
