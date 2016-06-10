@@ -1,7 +1,7 @@
 {
   "name": "easy-svg-store",
   "version": "1.0.5",
-  "description": "Simple SVG-sprite generator, No fuss no coconuts ",
+  "description": "Simple SVG Sprite generator. Use as a component or from the command line!",
   "main": "index.js",
   "scripts": {
     "test": "test"
@@ -17,7 +17,9 @@
   },
   "keywords": [
     "svg",
-    "sprite"
+    "sprite",
+    "svg store",
+    "commandline svg"
   ],
   "author": "Roland Castillo",
   "license": "MIT",
